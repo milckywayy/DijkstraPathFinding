@@ -1,0 +1,10 @@
+Nodes:
+A
+B
+C
+D
+Edges:
+A B 5
+A C 9
+A D 3
+B C 4
