@@ -1,5 +1,4 @@
-#include "iostream"
-
+#include <iostream>
 #include "node.h"
 
 using namespace std;
@@ -29,12 +28,8 @@ void Node::printNode() {
     }
 }
 
-void Node::freeNode() {
+Node::~Node() {
     for (pair<int, Node*> p : next) {
         delete p.second;
     }
-}
-
-Node::~Node() {
-    freeNode();
 }

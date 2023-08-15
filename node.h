@@ -17,7 +17,6 @@ public:
     char getLetter();
     Node* getNext();
     void printNode();
-    void freeNode();
     ~Node();
 };
 
