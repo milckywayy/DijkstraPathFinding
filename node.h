@@ -1,7 +1,7 @@
 #ifndef NODE_H_
 #define NODE_H_
 
-#include <map>
+#include <unordered_map>
 
 using namespace std;
 
@@ -9,13 +9,16 @@ using namespace std;
 class Node {
 private:
     char letter;
-    map<int, Node*> next;
+    int distance;
+    unordered_map<int, Node*> next;
 
 public:
     Node(char letter);
     void addConnection(Node *node, int weight);
+    void setDistance(int distance);
     char getLetter();
-    Node* getNext();
+    int getDistance();
+    unordered_map<int, Node*> getConnectedNodes();
     void printNode();
     ~Node();
 };

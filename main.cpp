@@ -1,6 +1,7 @@
 #include <iostream>
 #include "node.h"
 #include "read_map.h"
+#include "dijkstra.h"
 
 using namespace std;
 
@@ -28,6 +29,8 @@ int main(int argc, char const *argv[])
         cerr << "Error: Specified start node or end node is not defined on the map." << endl;
         return 3;
     }
+
+    dijkstra(nodes, startNodeLetter, endNodeLetter);
 
     // for (pair<char, Node*> n: nodes) {
     // 	n.second->printNode();

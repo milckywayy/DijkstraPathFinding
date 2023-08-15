@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 #include "node.h"
 
 using namespace std;
@@ -6,19 +7,27 @@ using namespace std;
 
 Node::Node(char letter) {
     this->letter = letter;
+    this->distance = numeric_limits<int>::max();
 }
 
 void Node::addConnection(Node *node, int weight) {
     next[weight] = node;
 }
 
+void Node::setDistance(int distance) {
+    this->distance = distance;  
+}
+
 char Node::getLetter() {
     return letter;
 }
 
-Node* Node::getNext() {
-    map<int, Node*>::iterator it = next.begin();
-    return it->second;
+int Node::getDistance() {
+    return distance;  
+}
+
+unordered_map<int, Node*> Node::getConnectedNodes() {
+    return next;
 }
 
 void Node::printNode() {
