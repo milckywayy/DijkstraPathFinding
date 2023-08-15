@@ -1,6 +1,4 @@
-#include <iostream>
 #include <fstream>
-#include <unordered_map>
 #include "read_map.h"
 #include "node.h"
 
@@ -11,12 +9,14 @@
 #define TARGET_CHAR_INDEX 2
 #define WEIGHT_CHAR_INDEX 4
 
+using namespace std;
 
-Node* readMap(string fileName) {
+
+unordered_map<char, Node*> readMap(string fileName) {
     ifstream file(fileName);
 
     if (!file.is_open()) {
-        throw runtime_error("Couldn't read " +  fileName + '\n');
+        throw runtime_error("Couldn't open " +  fileName + '\n');
     }
 
     unordered_map<char, Node*> nodes;
@@ -42,6 +42,10 @@ Node* readMap(string fileName) {
             target = line[TARGET_CHAR_INDEX];
             weight = line[WEIGHT_CHAR_INDEX] - '0';
 
+            if (nodes.find(source) == nodes.end() || nodes.find(target) == nodes.end()) {
+                throw runtime_error("Found non existing node in egde.");
+            }
+
             nodes[source]->addConnection(nodes[target], weight);
         }
         else {
@@ -49,16 +53,7 @@ Node* readMap(string fileName) {
         }
     }
 
-    for (pair<char, Node*> n: nodes) {
-        n.second->printNode();
-        cout << endl;
-    }
-
-    for (pair<char, Node*> n: nodes) {
-    	delete n.second;
-    }
-    // delete nodes['A'];
-
     file.close();
 
+    return nodes;
 }

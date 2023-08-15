@@ -2,11 +2,12 @@
 #define READ_MAP_H_
 
 #include <string>
+#include <unordered_map>
 #include "node.h"
 
 using namespace std;
 
 
-Node* readMap(string fileName);
+unordered_map<char, Node*> readMap(string fileName);
 
 #endif

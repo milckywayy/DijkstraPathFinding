@@ -24,7 +24,7 @@ Node* Node::getNext() {
 void Node::printNode() {
     cout << "Node " << letter << endl;
     for (pair<int, Node*> n : next) {
-        cout << n.second->getLetter() << ": " << n.first << endl;
+        cout << "\t" << n.second->getLetter() << ": " << n.first << endl;
     }
 }
 

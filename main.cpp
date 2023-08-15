@@ -7,19 +7,35 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    readMap("map.txt");
-    
-    // Node* n = new Node('A');
-    // n->addConnection(new Node('B'), 2);
-    // n->addConnection(new Node('C'), 3);
-    // n->addConnection(new Node('D'), 1);
-    // n->printNode();
+    unordered_map<char, Node*> nodes;
 
-    // Node *next = n->getNext();
-    // next->addConnection(new Node('A'), 2);
-    // next->printNode();
+    if (argc < 3) {
+        cerr << "Not enough arguments." << endl;
+        return 1;
+    }
 
-    // delete n;
+    char startNodeLetter = argv[1][0];
+    char endNodeLetter = argv[2][0];
+
+    try { 
+        nodes = readMap("map.txt");
+    } catch (exception &e) {
+        cerr << "Error: " << e.what() << endl;
+        return 2;
+    }
+
+    if (nodes.find(startNodeLetter) == nodes.end() || nodes.find(endNodeLetter) == nodes.end()) {
+        cerr << "Error: Specified start node or end node is not defined on the map." << endl;
+        return 3;
+    }
+
+    // for (pair<char, Node*> n: nodes) {
+    // 	n.second->printNode();
+    // }
+
+    for (pair<char, Node*> n: nodes) {
+    	delete n.second;
+    }
     
     return 0;
 }
