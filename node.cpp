@@ -29,7 +29,4 @@ void Node::printNode() {
 }
 
 Node::~Node() {
-    for (pair<int, Node*> p : next) {
-        delete p.second;
-    }
 }

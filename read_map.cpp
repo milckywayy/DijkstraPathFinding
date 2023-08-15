@@ -54,10 +54,10 @@ Node* readMap(string fileName) {
         cout << endl;
     }
 
-    // for (pair<char, Node*> n: nodes) {
-    //     delete n.second;
-    // }
-    delete nodes['A'];
+    for (pair<char, Node*> n: nodes) {
+    	delete n.second;
+    }
+    // delete nodes['A'];
 
     file.close();
 
