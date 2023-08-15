@@ -5,30 +5,36 @@
 using namespace std;
 
 
-Node::Node(double weight) {
-    this->weight = weight;
+Node::Node(char letter) {
+    this->letter = letter;
 }
 
-void Node::addConnection(Node node) {
-    next.push_back(node);
+void Node::addConnection(Node *node, int weight) {
+    next[weight] = node;
 }
 
-double Node::getWeight() {
-    return weight;
+char Node::getLetter() {
+    return letter;
 }
 
-Node *Node::getNext(unsigned int index) {
-    if (index < next.size()) {
-        return &(next[index]);
-    }
-    else {
-        throw out_of_range("Index out of range.");
-    }
+Node* Node::getNext() {
+    map<int, Node*>::iterator it = next.begin();
+    return it->second;
 }
 
 void Node::printNode() {
-    cout << "Weight: " << weight << endl;
-    for (int i = 0; i < next.size(); i++) {
-        cout << "Node " << i << " " << next[i].getWeight() << endl;
+    cout << "Node " << letter << endl;
+    for (pair<int, Node*> n : next) {
+        cout << n.second->getLetter() << ": " << n.first << endl;
     }
+}
+
+void Node::freeNode() {
+    for (pair<int, Node*> p : next) {
+        delete p.second;
+    }
+}
+
+Node::~Node() {
+    freeNode();
 }

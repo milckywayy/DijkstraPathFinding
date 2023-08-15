@@ -1,22 +1,24 @@
 #ifndef NODE_H_
 #define NODE_H_
 
-#include <vector>
+#include <map>
 
 using namespace std;
 
 
 class Node {
 private:
-    double weight;
-    vector<Node> next;
+    char letter;
+    map<int, Node*> next;
 
 public:
-    Node(double weight);
-    void addConnection(Node node);
-    double getWeight();
-    Node *getNext(unsigned int index);
+    Node(char letter);
+    void addConnection(Node *node, int weight);
+    char getLetter();
+    Node* getNext();
     void printNode();
+    void freeNode();
+    ~Node();
 };
 
 #endif

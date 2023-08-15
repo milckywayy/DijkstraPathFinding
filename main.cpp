@@ -9,23 +9,13 @@ int main(int argc, char const *argv[])
 {
     cout << "Hello world!" << endl << endl;
     
-    Node n(3.14);
-    n.addConnection(Node(2.72));
-    n.addConnection(Node(21.37));
-    n.printNode();
-    cout << endl;
+    Node* n = new Node('A');
+    n->addConnection(new Node('B'), 2);
+    n->addConnection(new Node('C'), 3);
+    n->addConnection(new Node('D'), 1);
+    n->printNode();
 
-    Node *next = n.getNext(0);
-    next->printNode();
-    cout << endl;
-
-    try {
-        Node *next2 = n.getNext(5);
-    }
-    catch (exception &e) {
-        cout << e.what() << endl;
-    }
-    
+    delete n;
     
     return 0;
 }
