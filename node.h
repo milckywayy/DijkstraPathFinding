@@ -9,15 +9,19 @@ using namespace std;
 class Node {
 private:
     char letter;
-    int distance;
     unordered_map<int, Node*> next;
+    int distance;
+    bool visited;
+    char prevNodeLetter;
 
 public:
     Node(char letter);
     void addConnection(Node *node, int weight);
     void setDistance(int distance);
+    bool setVisited(bool visited);
     char getLetter();
     int getDistance();
+    bool getVisited();
     unordered_map<int, Node*> getConnectedNodes();
     void printNode();
     ~Node();

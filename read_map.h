@@ -2,12 +2,14 @@
 #define READ_MAP_H_
 
 #include <string>
-#include <unordered_map>
+#include <vector>
 #include "node.h"
 
 using namespace std;
 
 
-unordered_map<char, Node*> readMap(string fileName);
+bool contains(vector<Node*> nodes, char letter);
+Node *getNodeByLetter(vector<Node*> nodes, char letter);
+vector<Node*> readMap(string fileName);
 
 #endif

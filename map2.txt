@@ -1,0 +1,16 @@
+Nodes:
+A
+B
+C
+D
+E
+Edges:
+A B 4
+A C 2
+B C 3
+C B 1
+B D 2
+C E 5
+B E 3
+C D 4
+E D 1

@@ -12,14 +12,36 @@
 using namespace std;
 
 
-unordered_map<char, Node*> readMap(string fileName) {
+bool contains(vector<Node*> nodes, char letter) {
+    for (Node* node : nodes) {
+        if (node->getLetter() == letter) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+Node *getNodeByLetter(vector<Node*> nodes, char letter) {
+    for (Node *node : nodes) {
+        if (node->getLetter() == letter) {
+            return node;
+        }
+    }
+
+    return NULL;
+}
+
+
+vector<Node*> readMap(string fileName) {
     ifstream file(fileName);
 
     if (!file.is_open()) {
         throw runtime_error("Couldn't open " +  fileName + '\n');
     }
 
-    unordered_map<char, Node*> nodes;
+    vector<Node*> nodes;
     string line;
     char source;
     char target;
@@ -29,7 +51,7 @@ unordered_map<char, Node*> readMap(string fileName) {
     if (line == "Nodes:") {
         while (getline(file, line) && line != "Edges:") {
             if (line.size() >= NODE_LINE_CHARS) {
-                nodes[line[LETTER_CHAR_INDEX]] = new Node(line[LETTER_CHAR_INDEX]);
+                nodes.push_back(new Node(line[LETTER_CHAR_INDEX]));
             }
             else {
                 throw runtime_error("File " + fileName + " has invalid format.");
@@ -42,11 +64,11 @@ unordered_map<char, Node*> readMap(string fileName) {
             target = line[TARGET_CHAR_INDEX];
             weight = line[WEIGHT_CHAR_INDEX] - '0';
 
-            if (nodes.find(source) == nodes.end() || nodes.find(target) == nodes.end()) {
+            if (!contains(nodes, source) || !contains(nodes, target)) {
                 throw runtime_error("Found non existing node in egde.");
             }
 
-            nodes[source]->addConnection(nodes[target], weight);
+            getNodeByLetter(nodes, source)->addConnection(getNodeByLetter(nodes, target), weight);
         }
         else {
             throw runtime_error("File " + fileName + " has invalid format.");

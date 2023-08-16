@@ -8,7 +8,7 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    unordered_map<char, Node*> nodes;
+    vector<Node*> nodes;
 
     if (argc < 3) {
         cerr << "Not enough arguments." << endl;
@@ -19,25 +19,21 @@ int main(int argc, char const *argv[])
     char endNodeLetter = argv[2][0];
 
     try { 
-        nodes = readMap("map.txt");
+        nodes = readMap("map2.txt");
     } catch (exception &e) {
         cerr << "Error: " << e.what() << endl;
         return 2;
     }
 
-    if (nodes.find(startNodeLetter) == nodes.end() || nodes.find(endNodeLetter) == nodes.end()) {
+    if (!contains(nodes, startNodeLetter) || !contains(nodes, endNodeLetter)) {
         cerr << "Error: Specified start node or end node is not defined on the map." << endl;
         return 3;
     }
 
     dijkstra(nodes, startNodeLetter, endNodeLetter);
 
-    // for (pair<char, Node*> n: nodes) {
-    // 	n.second->printNode();
-    // }
-
-    for (pair<char, Node*> n: nodes) {
-    	delete n.second;
+    for (Node *node : nodes) {
+    	delete node;
     }
     
     return 0;
