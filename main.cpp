@@ -27,6 +27,11 @@ int main(int argc, char const *argv[])
 
     if (!contains(nodes, startNodeLetter) || !contains(nodes, endNodeLetter)) {
         cerr << "Error: Specified start node or end node is not defined on the map." << endl;
+    	
+	for (Node *node : nodes) {
+    		delete node;
+    	}
+
         return 3;
     }
 
