@@ -7,6 +7,6 @@
 using namespace std;
 
 
-void dijkstra(vector<Node*> nodes, char startNodeLetter, char endNodeLetter);
+vector<Node*> dijkstra(vector<Node*> nodes, char startNodeLetter, char endNodeLetter);
 
 #endif

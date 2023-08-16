@@ -17,12 +17,14 @@ private:
 public:
     Node(char letter);
     void addConnection(Node *node, int weight);
-    void setDistance(int distance);
-    bool setVisited(bool visited);
     char getLetter();
     int getDistance();
     bool getVisited();
+    char getPrevNodeLetter();
     unordered_map<int, Node*> getConnectedNodes();
+    void setDistance(int distance);
+    void setVisited(bool visited);
+    void setPrevNodeLetter(char prevLetter);
     void printNode();
     ~Node();
 };

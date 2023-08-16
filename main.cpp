@@ -10,16 +10,17 @@ int main(int argc, char const *argv[])
 {
     vector<Node*> nodes;
 
-    if (argc < 3) {
+    if (argc < 4) {
         cerr << "Not enough arguments." << endl;
         return 1;
     }
 
-    char startNodeLetter = argv[1][0];
-    char endNodeLetter = argv[2][0];
+    const char *fileName = argv[1];
+    char startNodeLetter = argv[2][0];
+    char endNodeLetter = argv[3][0];
 
     try { 
-        nodes = readMap("map2.txt");
+        nodes = readMap(fileName);
     } catch (exception &e) {
         cerr << "Error: " << e.what() << endl;
         return 2;
@@ -30,7 +31,13 @@ int main(int argc, char const *argv[])
         return 3;
     }
 
-    dijkstra(nodes, startNodeLetter, endNodeLetter);
+    vector<Node*> path;
+    path = dijkstra(nodes, startNodeLetter, endNodeLetter);
+
+    cout << "Path found: ";
+    for (Node *node : path) {
+        cout << node->getLetter() << " ";
+    }
 
     for (Node *node : nodes) {
     	delete node;
