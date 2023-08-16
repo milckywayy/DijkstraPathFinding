@@ -29,7 +29,7 @@ int main(int argc, char const *argv[])
     if (!contains(nodes, startNodeLetter) || !contains(nodes, endNodeLetter)) {
         cerr << "Error: Specified start node or end node is not defined on the map." << endl;
     	
-	for (Node *node : nodes) {
+	    for (Node *node : nodes) {
     		delete node;
     	}
 
@@ -38,6 +38,11 @@ int main(int argc, char const *argv[])
 
     vector<Node*> path;
     path = dijkstra(nodes, startNodeLetter, endNodeLetter);
+
+    if (endNodeLetter && path.at(0)->getLetter() != startNodeLetter && path.at(path.size() - 1)->getLetter()) {
+        cout << "Path not found." << endl;
+        return 0;
+    }
 
     cout << "Path found: ";
     for (Node *node : path) {

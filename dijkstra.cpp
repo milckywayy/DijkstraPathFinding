@@ -10,13 +10,10 @@ bool ascendingCompare(const void *a, const void *b) {
 
 vector<Node*> dijkstra(vector<Node*> nodes, char startNodeLetter, char endNodeLetter) {
     priority_queue<Node*, std::vector<Node *>, decltype(&ascendingCompare)> queue(ascendingCompare);
-    getNodeByLetter(nodes, startNodeLetter)->setDistance(0);
+    Node *node = getNodeByLetter(nodes, startNodeLetter);
+    node->setDistance(0);
+    queue.push(node);
 
-    for (Node *node: nodes) {
-        queue.push(node);
-    }
-
-    Node *node;
     while (queue.size() > 0) {
         node = queue.top();
         queue.pop();
@@ -26,6 +23,7 @@ vector<Node*> dijkstra(vector<Node*> nodes, char startNodeLetter, char endNodeLe
             if (!p.second->getVisited() && node->getDistance() + p.first < p.second->getDistance()){
                 p.second->setDistance(node->getDistance() + p.first);
                 p.second->setPrevNodeLetter(node->getLetter());
+                queue.push(p.second);
             }
         }
     }
@@ -33,11 +31,10 @@ vector<Node*> dijkstra(vector<Node*> nodes, char startNodeLetter, char endNodeLe
     vector<Node*> path;
     node = getNodeByLetter(nodes, endNodeLetter);
     path.insert(path.begin(), node);
-    do {
+    while (node->getPrevNodeLetter() != '\0') {
         node = getNodeByLetter(nodes, node->getPrevNodeLetter());
         path.insert(path.begin(), node);
     }
-    while (node->getPrevNodeLetter() != '\0');
 
     return path;
 }
