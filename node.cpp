@@ -13,7 +13,7 @@ Node::Node(char letter) {
 }
 
 void Node::addConnection(Node *node, int weight) {
-    next[weight] = node;
+    next[node] = weight;
 }
 
 char Node::getLetter() {
@@ -28,7 +28,7 @@ bool Node::getVisited() {
     return visited;  
 }
 
-unordered_map<int, Node*> Node::getConnectedNodes() {
+unordered_map<Node*, int> Node::getConnectedNodes() {
     return next;
 }
 
@@ -50,8 +50,8 @@ void Node::setPrevNodeLetter(char prevLetter) {
 
 void Node::printNode() {
     cout << "Node " << letter << endl;
-    for (pair<int, Node*> n : next) {
-        cout << "\t" << n.second->getLetter() << ": " << n.first << endl;
+    for (pair<Node*, int> n : next) {
+        cout << "\t" << n.first->getLetter() << ": " << n.second << endl;
     }
 }
 

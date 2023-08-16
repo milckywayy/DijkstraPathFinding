@@ -1,4 +1,5 @@
 #include <fstream>
+#include <iostream>
 #include "read_map.h"
 #include "node.h"
 
@@ -45,7 +46,7 @@ vector<Node*> readMap(string fileName) {
     string line;
     char source;
     char target;
-    char weight;
+    int weight;
 
     getline(file, line);
     if (line == "Nodes:") {

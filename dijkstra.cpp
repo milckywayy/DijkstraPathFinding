@@ -1,5 +1,4 @@
 #include <queue>
-#include <iostream>
 #include "dijkstra.h"
 #include "read_map.h"
 
@@ -19,11 +18,11 @@ vector<Node*> dijkstra(vector<Node*> nodes, char startNodeLetter, char endNodeLe
         queue.pop();
         node->setVisited(true);
 
-        for (pair<int, Node*> p : node->getConnectedNodes()) {
-            if (!p.second->getVisited() && node->getDistance() + p.first < p.second->getDistance()){
-                p.second->setDistance(node->getDistance() + p.first);
-                p.second->setPrevNodeLetter(node->getLetter());
-                queue.push(p.second);
+        for (pair<Node*, int> p : node->getConnectedNodes()) {
+            if (!p.first->getVisited() && node->getDistance() + p.second < p.first->getDistance()){
+                p.first->setDistance(node->getDistance() + p.second);
+                p.first->setPrevNodeLetter(node->getLetter());
+                queue.push(p.first);
             }
         }
     }

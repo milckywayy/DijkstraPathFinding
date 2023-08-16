@@ -9,7 +9,7 @@ using namespace std;
 class Node {
 private:
     char letter;
-    unordered_map<int, Node*> next;
+    unordered_map<Node*, int> next;
     int distance;
     bool visited;
     char prevNodeLetter;
@@ -21,7 +21,7 @@ public:
     int getDistance();
     bool getVisited();
     char getPrevNodeLetter();
-    unordered_map<int, Node*> getConnectedNodes();
+    unordered_map<Node*, int> getConnectedNodes();
     void setDistance(int distance);
     void setVisited(bool visited);
     void setPrevNodeLetter(char prevLetter);
